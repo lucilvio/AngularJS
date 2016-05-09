@@ -1,28 +1,13 @@
 <html ng-app="sample">
 
 <head>
-
     <title> Sample Angular </title>
-    <script src="http://lucilvio-samplecdn.azureedge.net/node_modules/angular/angular.min.js"></script>
-    <script src="http://lucilvio-samplecdn.azureedge.net/index.js">
-    </script>
-
-    <style>
-        .concluida {
-            color: gray;
-            text-decoration: line-through;
-        }
-        
-        .aberta {
-            color: black;
-            text-decoration: none;
-        }
-    </style>
+    <link href="http://lucilvio-samplecdn.azureedge.net/css/index.css" rel="stylesheet" />
 </head>
 
 <body>
 
-    <h1> Lista de Tarefas </h1> 
+    <h1> Lista de Tarefas </h1>
 
     <div ng-controller="todoController as todos">
         <ul ng-repeat="task in todos.tasks">
@@ -38,8 +23,9 @@
         </form>
     </div>
 
-
-
+    <script src="http://lucilvio-samplecdn.azureedge.net/node_modules/angular/angular.min.js"></script>
+    <script src="http://lucilvio-samplecdn.azureedge.net/js/index.js">
+    </script>
 </body>
 
 </html>
