@@ -18,6 +18,9 @@ angular.module("sample", []).controller("todoController", function() {
         if(this.concluida) {
             this.classConcluida = "concluida";
         }
+        else {
+                this.classConcluida = "";
+        }
     }
     
 });
