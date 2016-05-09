@@ -19,7 +19,7 @@ angular.module("sample", []).controller("todoController", function() {
             this.classConcluida = "concluida";
         }
         else {
-                this.classConcluida = "";
+                this.classConcluida = "aberta";
         }
     }
     
