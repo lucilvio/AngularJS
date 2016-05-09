@@ -2,7 +2,8 @@
 
 <head>
     <title> Sample Angular </title>
-    <link href="http://lucilvio-samplecdn.azureedge.net/css/index.css" rel="stylesheet" />
+    <!--<link href="http://lucilvio-samplecdn.azureedge.net/css/index.css" rel="stylesheet" />-->
+    <link href="css/index.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -10,22 +11,28 @@
     <h1> Lista de Tarefas </h1>
 
     <div ng-controller="todoController as todos">
-        <ul ng-repeat="task in todos.tasks">
-            <li> <input type="checkbox" ng-model="todos.concluida" ng-click="todos.marcarConcluida()" />
-                <span class="{{ todos.classConcluida }}"> {{ task.titulo }} </span>
+        <span> <b> {{ todos.tarefasAbertas }} </b> tarefa(s) aberta(s) de <b> {{ todos.totalDeTarefas }} </b> </span>
+        <ul>
+            <li ng-repeat="task in todos.tasks" ng-click="todos.marcarConcluida($event, task)">
+                <input type="checkbox" />
+                <span> {{ task.titulo }} </span>
             </li>
         </ul>
 
+        <button type="button" ng-click="todos.arquivar()"> Arquivar concluidas  </button>
+        <br/><br/>
+        
         <form ng-submit="todos.adicionarTarefa()">
-
-            <input type="text" ng-model="todos.newTask" /><input type="submit" value="Adicionar Tarefa" />
-
+            <input type="text" ng-model="todos.newTask" required />
+            <input type="submit" value="Adicionar Tarefa" />
         </form>
     </div>
 
-    <script src="http://lucilvio-samplecdn.azureedge.net/node_modules/angular/angular.min.js"></script>
-    <script src="http://lucilvio-samplecdn.azureedge.net/js/index.js">
-    </script>
+    <!--<script src="http://lucilvio-samplecdn.azureedge.net/node_modules/angular/angular.min.js"></script>
+    <script src="http://lucilvio-samplecdn.azureedge.net/js/index.js"></script>-->
+
+    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
