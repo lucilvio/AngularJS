@@ -1,0 +1,40 @@
+<html ng-app="sample">
+
+<head>
+
+    <title> Sample Angular </title>
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="index.js">
+    </script>
+
+    <style>
+        .concluida {
+            color: gray;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1> Lista de Tarefas </h1> 
+
+    <div ng-controller="todoController as todos">
+        <ul ng-repeat="task in todos.tasks">
+            <li> <input type="checkbox" ng-model="todos.concluida" ng-click="todos.marcarConcluida()" />
+                <span class="{{ todos.classConcluida }}"> {{ task.titulo }} </span>
+            </li>
+        </ul>
+
+        <form ng-submit="todos.adicionarTarefa()">
+
+            <input type="text" ng-model="todos.newTask" /><input type="submit" value="Adicionar Tarefa" />
+
+        </form>
+    </div>
+
+
+
+</body>
+
+</html>
