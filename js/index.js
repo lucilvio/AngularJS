@@ -1,35 +1,62 @@
-angular.module("sample", []).controller("todoController", function() {
+angular.module("sample", []).controller("todoController", function($http) {
+    var self = this;
+
+    var api = "http://lucilvio-api.azurewebsites.net/api";
 
     this.tarefasAbertas = 1;
     this.totalDeTarefas = 1;
 
-    this.tasks = [{
-        titulo: "Tarefa 1",
-        concluida: false
-    }];
+    this.tasks = [];
+
+    this.atualizarNumeroDeTarefas = function() {
+        var abertas = 0;
+
+        this.tasks.forEach(function(e) {
+            if (!e.concluida) {
+                abertas++;
+            }
+        });
+
+        this.tarefasAbertas = abertas;
+        this.totalDeTarefas = this.tasks.length;
+    }
+
+    this.listarTarefas = function() {
+        $http.get(api + "/tasks").then(function(response) {
+            self.tasks = [];
+
+            if (response.data) {
+                response.data.forEach(function(element) {
+                    self.tasks.push(element);
+                }, this);
+            }
+            
+            self.atualizarNumeroDeTarefas();
+        });
+    }
 
     this.adicionarTarefa = function() {
-        this.tasks.push({
-            titulo: this.newTask,
-            concluida: false
+        $http.post(api + "/tasks", {
+            Descricao: this.newTask
+        }).then(function(repsonse) {
+            self.newTask = '';
+            self.atualizarNumeroDeTarefas();
+
+            self.listarTarefas();
         });
-        
-        this.newTask = '';
-        
-        this.atualizarNumeroDeTarefas();
     }
-    
+
     this.arquivar = function() {
         var newTasks = [];
-        
+
         this.tasks.forEach(function(element) {
-            if(!element.concluida) {
+            if (!element.concluida) {
                 newTasks.push(element);
             }
         }, this);
-        
+
         this.tasks = newTasks;
-        
+
         this.atualizarNumeroDeTarefas();
     }
 
@@ -44,21 +71,10 @@ angular.module("sample", []).controller("todoController", function() {
             $texto.className = "aberta";
             this.tasks[this.tasks.indexOf(task)].concluida = false;
         }
-        
+
         this.atualizarNumeroDeTarefas();
     }
-    
-    this.atualizarNumeroDeTarefas = function() {
-        var abertas = 0;
-        
-        this.tasks.forEach(function(e) {
-           if(!e.concluida) {
-               abertas++;
-           } 
-        });
-        
-        this.tarefasAbertas = abertas;
-        this.totalDeTarefas = this.tasks.length; 
-    }
+
+    this.listarTarefas();
 
 });
