@@ -1,7 +1,8 @@
 angular.module("sample", []).controller("todoController", function($http) {
     var self = this;
 
-    var api = "http://lucilvio-api.azurewebsites.net/api";
+    // var api = "http://lucilvio-api.azurewebsites.net/api";
+    var api = "http://localhost:30452/api";
 
     this.tarefasAbertas = 1;
     this.totalDeTarefas = 1;
